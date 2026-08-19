@@ -42,8 +42,54 @@
 ```
 
 `При необходимости прикрепитe сюда скриншоты
-![Название скриншота 1](ссылка на скриншот 1)`
+![Задание 1](./img/1.2.png);
+![Задание 1](./img/1.3.png);
+![Задание 1](./img/1.4.png);
+![Задание 1](./img/1.png);
 
+
+global
+    log /dev/log local0
+    log /dev/log local1 notice
+    chroot /var/lib/haproxy
+    stats socket /run/haproxy/admin.sock mode 660 level admin
+    stats timeout 30s
+    user haproxy
+    group haproxy
+    daemon
+
+defaults
+    log global
+    mode http
+    option httplog
+    option dontlognull
+    timeout connect 5000ms
+    timeout client 50000ms
+    timeout server 50000ms
+
+frontend http-frontend
+    bind *:8080
+    mode http
+    # Проверяем Host заголовок
+    acl is_example_local hdr(host) -i example.local
+    use_backend weighted-servers if is_example_local
+    # Если не example.local - возвращаем ошибку или перенаправляем
+    default_backend no-match
+
+backend weighted-servers
+    mode http
+    balance roundrobin
+    # Веса: server1 - 2, server2 - 3, server3 - 4
+    # HAProxy использует параметр weight
+    server server1 127.0.0.1:8001 check weight 2
+    server server2 127.0.0.1:8002 check weight 3
+    server server3 127.0.0.1:8003 check weight 4
+
+backend no-match
+    mode http
+    http-request deny deny_status 403
+    # Или можно вернуть сообщение
+    # http-request return status 403 content-type text/plain string "Access denied: domain example.local required"
 
 ---
 
@@ -67,7 +113,60 @@
 ```
 
 `При необходимости прикрепитe сюда скриншоты
-![Название скриншота 2](ссылка на скриншот 2)`
+![Задание 1](./img/2.png);
+![Задание 1](./img/3.png);
+![Задание 1](./img/4.png);
+![Задание 1](./img/5.png);
+![Задание 1](./img/6.png);
+![Задание 1](./img/7.png);
+![Задание 1](./img/8.png);
+![Задание 1](./img/9.png);
+
+
+global
+    log /dev/log local0
+    log /dev/log local1 notice
+    chroot /var/lib/haproxy
+    stats socket /run/haproxy/admin.sock mode 660 level admin
+    stats timeout 30s
+    user haproxy
+    group haproxy
+    daemon
+
+defaults
+    log global
+    mode http
+    option httplog
+    option dontlognull
+    timeout connect 5000ms
+    timeout client 50000ms
+    timeout server 50000ms
+
+frontend http-frontend
+    bind *:8080
+    mode http
+    acl is_example_local hdr(host) -i example.local
+    use_backend weighted-servers if is_example_local
+    default_backend no-match
+
+backend weighted-servers
+    mode http
+    balance roundrobin
+    server server1 127.0.0.1:8001 check weight 2
+    server server2 127.0.0.1:8002 check weight 3
+    server server3 127.0.0.1:8003 check weight 4
+
+backend no-match
+    mode http
+    http-request deny deny_status 403
+
+listen stats
+    bind *:8081
+    mode http
+    stats enable
+    stats uri /stats
+    stats refresh 10s
+    stats auth admin:admin
 
 
 ---
