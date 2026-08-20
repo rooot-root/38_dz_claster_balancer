@@ -31,8 +31,7 @@ HAProxy настроен на порту 8080 с балансировкой Roun
 Запросы распределяются по очереди между серверами
 
 ссылкана файл:
-./haproxy_submit/haproxy_Round-robin_4level.cfg
-
+https://github.com/rooot-root/38_dz_claster_balancer/blob/main/haproxy_submit/haproxy_Round-robin_4level.cfg
 Скриншоты:
 ![Задание 1](./img/1.2.png);
 ![Задание 1](./img/1.3.png);
@@ -50,11 +49,11 @@ HAProxy настроен на порту 8080 с балансировкой Roun
 Настроены веса: Server1 - 2, Server2 - 3, Server3 - 4
 Балансировка работает только для домена example.local
 Запросы без домена example.local блокируются (403 Forbidden)
-```
-ссылкана файл:
-./haproxy_submit/haproxy_7level.cfg
 
-```
+ссылкана файл:
+https://github.com/rooot-root/38_dz_claster_balancer/blob/main/haproxy_submit/haproxy_7level.cfg
+
+
 Скриншоты:
 ![Задание 1](./img/2.png);
 ![Задание 1](./img/3.png);
