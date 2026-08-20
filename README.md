@@ -32,6 +32,7 @@ HAProxy настроен на порту 8080 с балансировкой Roun
 
 ссылкана файл:
 https://github.com/rooot-root/38_dz_claster_balancer/blob/main/haproxy_submit/haproxy_Round-robin_4level.cfg
+
 Скриншоты:
 ![Задание 1](./img/1.2.png);
 ![Задание 1](./img/1.3.png);
