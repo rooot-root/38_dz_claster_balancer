@@ -74,11 +74,11 @@ backend no-match
     # Или можно вернуть сообщение
     # http-request return status 403 content-type text/plain string "Access denied: domain example.local required"
 ```
-`Скриншоты:
+Скриншоты:
 ![Задание 1](./img/1.2.png);
 ![Задание 1](./img/1.3.png);
 ![Задание 1](./img/1.4.png);
-![Задание 1](./img/1.png);`
+![Задание 1](./img/1.png);
 
 
 
@@ -137,12 +137,7 @@ listen stats
     stats refresh 10s
     stats auth admin:admin
 ```
-....
-....
-....
-....
-
-`Скриншоты:
+Скриншоты:
 ![Задание 1](./img/2.png);
 ![Задание 1](./img/3.png);
 ![Задание 1](./img/4.png);
@@ -150,7 +145,7 @@ listen stats
 ![Задание 1](./img/6.png);
 ![Задание 1](./img/7.png);
 ![Задание 1](./img/8.png);
-![Задание 1](./img/9.png);`
+![Задание 1](./img/9.png);
 
 
 
