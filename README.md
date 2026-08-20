@@ -30,7 +30,7 @@
 HAProxy настроен на порту 8080 с балансировкой Round-robin
 Запросы распределяются по очереди между серверами
 
-
+```
 global
     log /dev/log local0
     log /dev/log local1 notice
@@ -73,7 +73,7 @@ backend no-match
     http-request deny deny_status 403
     # Или можно вернуть сообщение
     # http-request return status 403 content-type text/plain string "Access denied: domain example.local required"
-
+```
 Скриншоты:
 ![Задание 1](./img/1.2.png);
 ![Задание 1](./img/1.3.png);
@@ -91,7 +91,7 @@ backend no-match
 Настроены веса: Server1 - 2, Server2 - 3, Server3 - 4
 Балансировка работает только для домена example.local
 Запросы без домена example.local блокируются (403 Forbidden)
-
+```
 global
     log /dev/log local0
     log /dev/log local1 notice
@@ -136,7 +136,7 @@ listen stats
     stats uri /stats
     stats refresh 10s
     stats auth admin:admin
-	
+	```
 Скриншоты:
 ![Задание 1](./img/2.png);
 ![Задание 1](./img/3.png);
