@@ -30,50 +30,9 @@
 HAProxy настроен на порту 8080 с балансировкой Round-robin
 Запросы распределяются по очереди между серверами
 
-```
-global
-    log /dev/log local0
-    log /dev/log local1 notice
-    chroot /var/lib/haproxy
-    stats socket /run/haproxy/admin.sock mode 660 level admin
-    stats timeout 30s
-    user haproxy
-    group haproxy
-    daemon
+ссылкана файл:
+./haproxy_submit/haproxy_Round-robin_4level.cfg
 
-defaults
-    log global
-    mode http
-    option httplog
-    option dontlognull
-    timeout connect 5000ms
-    timeout client 50000ms
-    timeout server 50000ms
-
-frontend http-frontend
-    bind *:8080
-    mode http
-    # Проверяем Host заголовок
-    acl is_example_local hdr(host) -i example.local
-    use_backend weighted-servers if is_example_local
-    # Если не example.local - возвращаем ошибку или перенаправляем
-    default_backend no-match
-
-backend weighted-servers
-    mode http
-    balance roundrobin
-    # Веса: server1 - 2, server2 - 3, server3 - 4
-    # HAProxy использует параметр weight
-    server server1 127.0.0.1:8001 check weight 2
-    server server2 127.0.0.1:8002 check weight 3
-    server server3 127.0.0.1:8003 check weight 4
-
-backend no-match
-    mode http
-    http-request deny deny_status 403
-    # Или можно вернуть сообщение
-    # http-request return status 403 content-type text/plain string "Access denied: domain example.local required"
-```
 Скриншоты:
 ![Задание 1](./img/1.2.png);
 ![Задание 1](./img/1.3.png);
@@ -92,50 +51,9 @@ backend no-match
 Балансировка работает только для домена example.local
 Запросы без домена example.local блокируются (403 Forbidden)
 ```
-global
-    log /dev/log local0
-    log /dev/log local1 notice
-    chroot /var/lib/haproxy
-    stats socket /run/haproxy/admin.sock mode 660 level admin
-    stats timeout 30s
-    user haproxy
-    group haproxy
-    daemon
+ссылкана файл:
+./haproxy_submit/haproxy_7level.cfg
 
-defaults
-    log global
-    mode http
-    option httplog
-    option dontlognull
-    timeout connect 5000ms
-    timeout client 50000ms
-    timeout server 50000ms
-
-frontend http-frontend
-    bind *:8080
-    mode http
-    acl is_example_local hdr(host) -i example.local
-    use_backend weighted-servers if is_example_local
-    default_backend no-match
-
-backend weighted-servers
-    mode http
-    balance roundrobin
-    server server1 127.0.0.1:8001 check weight 2
-    server server2 127.0.0.1:8002 check weight 3
-    server server3 127.0.0.1:8003 check weight 4
-
-backend no-match
-    mode http
-    http-request deny deny_status 403
-
-listen stats
-    bind *:8081
-    mode http
-    stats enable
-    stats uri /stats
-    stats refresh 10s
-    stats auth admin:admin
 ```
 Скриншоты:
 ![Задание 1](./img/2.png);
@@ -149,50 +67,3 @@ listen stats
 
 
 
-
-
----
-
-### Задание 3
-
-`Приведите ответ в свободной форме........`
-
-1. `Заполните здесь этапы выполнения, если требуется ....`
-2. `Заполните здесь этапы выполнения, если требуется ....`
-3. `Заполните здесь этапы выполнения, если требуется ....`
-4. `Заполните здесь этапы выполнения, если требуется ....`
-5. `Заполните здесь этапы выполнения, если требуется ....`
-6. 
-
-```
-Поле для вставки кода...
-....
-....
-....
-....
-```
-
-`При необходимости прикрепитe сюда скриншоты
-![Название скриншота](ссылка на скриншот)`
-
-### Задание 4
-
-`Приведите ответ в свободной форме........`
-
-1. `Заполните здесь этапы выполнения, если требуется ....`
-2. `Заполните здесь этапы выполнения, если требуется ....`
-3. `Заполните здесь этапы выполнения, если требуется ....`
-4. `Заполните здесь этапы выполнения, если требуется ....`
-5. `Заполните здесь этапы выполнения, если требуется ....`
-6. 
-
-```
-Поле для вставки кода...
-....
-....
-....
-....
-```
-
-`При необходимости прикрепитe сюда скриншоты
-![Название скриншота](ссылка на скриншот)`
